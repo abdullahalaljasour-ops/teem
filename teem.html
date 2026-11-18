@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ميدان أخلاقيات الأمن السيبراني | المهندس عبدالله بن جريد</title>
+<style>
+:root{
+ --bg:#020617;--card:#1e293b;--panel:#0f172a;
+ --blue:#38bdf8;--green:#10b981;--red:#ef4444;
+ --gold:#f59e0b;--muted:#94a3b8
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f8fafc;
+ font-family:Tahoma,Arial,sans-serif;line-height:1.7}
+header{text-align:center;padding:28px 15px;
+ background:linear-gradient(135deg,#0f172a,#1e293b);
+ border-bottom:2px solid #2563eb}
+header h1{color:var(--blue);margin:0;font-size:27px}
+header p{color:var(--muted)}
+main{max-width:1150px;margin:25px auto;padding:0 15px}
+.card{background:var(--card);padding:25px;border-radius:16px;
+ margin-bottom:20px;border:1px solid #334155}
+.auth{max-width:470px;margin:35px auto}
+h2,h3{color:var(--blue)}
+input,select,textarea{
+ width:100%;padding:13px;margin:7px 0 17px;
+ background:var(--panel);border:1px solid #475569;
+ border-radius:9px;color:white;font:inherit}
+textarea{min-height:110px;resize:vertical}
+button{font:inherit;cursor:pointer;border:0;border-radius:9px;
+ padding:12px 18px;background:#2563eb;color:white}
+button:hover{filter:brightness(1.15)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.btn{width:100%;font-weight:bold;margin-top:9px}
+.green{background:#059669}.red{background:#b91c1c}
+.gray{background:#475569}
+.hidden{display:none!important}
+.link{color:var(--blue);cursor:pointer;text-decoration:underline}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.team{background:var(--panel);padding:17px;border-radius:12px;
+ text-align:center;border-top:4px solid var(--blue)}
+.team strong{font-size:28px;color:var(--blue);display:block}
+.row{display:flex;justify-content:space-between;align-items:center;
+ flex-wrap:wrap;gap:12px}
+.pill{background:#1e40af55;padding:7px 13px;border-radius:20px}
+.timer{font-size:24px;font-weight:bold;color:var(--gold)}
+.progress{height:12px;background:#334155;border-radius:20px;overflow:hidden}
+.progress div{height:100%;background:var(--green);transition:width .3s}
+
+/* حاوية الصور التفاعلية الاحترافية */
+.scene-visual{
+ text-align:center;
+ background:radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+ padding:15px;
+ border-radius:14px;
+ margin-bottom:20px;
+ border:1px solid #334155;
+ box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+.scene-visual svg{
+ width:100%;
+ max-width:320px;
+ height:130px;
+ filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{background:var(--panel);border:2px solid #334155;
+ min-height:85px;text-align:right}
+.option.selected{border-color:var(--blue);background:#164e63}
+.option.correct{border-color:var(--green)}
+.option.wrong{border-color:var(--red)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.tags button{background:#334155;font-size:13px;padding:7px 10px}
+.feedback{background:var(--panel);padding:17px;border-radius:10px;
+ margin-top:20px;border-right:4px solid var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px;border-bottom:1px solid #334155;text-align:right}
+th{color:var(--blue)}
+.table-wrap{overflow-x:auto}
+.badge{display:inline-block;background:#064e3b;color:#a7f3d0;
+ border-radius:20px;padding:5px 11px;margin:4px}
+.stat{background:var(--panel);border-radius:12px;padding:15px;text-align:center}
+.stat strong{display:block;font-size:26px;color:var(--blue)}
+footer{text-align:center;padding:25px;color:var(--muted)}
+@media(max-width:650px){
+ .options{grid-template-columns:1fr}
+ .card{padding:17px}
+ header h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🛡️ ميدان أخلاقيات الأمن السيبراني</h1>
+<p>موقع المهندس عبدالله بن جريد | التقييم التفاعلي المتقدم</p>
+</header>
+
+<main>
+
+<section id="login" class="card auth">
+<h2 class="center">دخول المتدرب للاختبار</h2>
+<form id="joinForm">
+<label>الاسم الثلاثي أو اللقب</label>
+<input id="name" maxlength="70" required placeholder="اسم المتدرب الكريم">
+<label>اختر فريقك</label>
+<select id="team" required>
+<option value="">-- اختر الفريق --</option>
+<option value="1">🦅 الصقور</option>
+<option value="2">🛡️ الدرع</option>
+<option value="3">👁️ الحراس</option>
+<option value="4">⚡ الصواعق</option>
+<option value="5">🐺 الذئاب السيبرانية</option>
+</select>
+<button class="btn" type="submit">بدء التحدي</button>
+</form>
+<p class="center muted">يتم حفظ نتائج الاختبار محلياً في جهازك</p>
+<p class="center"><span class="link" onclick="show('coachLogin')">دخول لوحة المدرب</span></p>
+</section>
+
+<section id="coachLogin" class="card auth hidden">
+<h2 class="center">بوابة المدرب</h2>
+<p class="center muted">المهندس عبدالله بن جريد</p>
+<form id="coachForm">
+<label>اسم المستخدم</label>
+<input id="coachUser" autocomplete="username" required>
+<label>كلمة المرور</label>
+<input id="coachPass" type="password" autocomplete="current-password" required>
+<button class="btn green">دخول لوحة التحكم</button>
+</form>
+<p class="center"><span class="link" onclick="show('login')">العودة</span></p>
+</section>
+
+<section id="game" class="hidden">
+<div class="card">
+<div class="row">
+<div>
+<h2 id="welcome"></h2>
+<p id="teamName" class="muted"></p>
+</div>
+<button class="gray" onclick="logout()">خروج</button>
+</div>
+</div>
+
+<div id="teamBoard" class="grid"></div>
+
+<div class="card">
+<div class="row">
+<span id="counter" class="pill"></span>
+<span id="clock" class="timer">⏱ 01:00</span>
+</div>
+<div class="progress"><div id="progress"></div></div>
+
+<!-- الرسم البصري التفاعلي المتقدم -->
+<div id="sceneVisual" class="scene-visual"></div>
+
+<h2 id="questionTitle"></h2>
+<p id="questionDesc"></p>
+
+<h3>ما القرار المهني الصحيح؟</h3>
+<div id="answers" class="options"></div>
+
+<h3>التبرير الأخلاقي</h3>
+<p class="muted">اختر الوسوم المناسبة أو اكتب تبريرك باختصار.</p>
+<div class="tags">
+<button onclick="tag('احترام الخصوصية')">الخصوصية</button>
+<button onclick="tag('حدود الصلاحيات')">الصلاحيات</button>
+<button onclick="tag('الإبلاغ الرسمي')">الإبلاغ</button>
+<button onclick="tag('حماية السرية')">السرية</button>
+<button onclick="tag('تقليل الضرر')">تقليل الضرر</button>
+<button onclick="tag('المساءلة المهنية')">المساءلة</button>
+</div>
+<textarea id="reason" placeholder="لماذا اخترت هذا القرار؟"></textarea>
+
+<button id="submitAnswer" class="btn green" onclick="submitAnswer()">
+اعتماد القرار
+</button>
+
+<div id="feedback" class="feedback hidden">
+<h3 id="feedbackTitle"></h3>
+<p id="feedbackText"></p>
+<p id="reasonReview"></p>
+<button class="btn" onclick="nextQuestion()">السؤال التالي</button>
+</div>
+</div>
+
+<div class="card">
+<h3>🏅 شارات الإنجاز</h3>
+<div id="badges">لم تحصل على شارات بعد.</div>
+</div>
+</section>
+
+<section id="finished" class="card hidden center">
+<h2>🏆 انتهى الاختبار بنجاح</h2>
+<h3 id="finalName"></h3>
+<h2 id="finalScore"></h2>
+<p id="finalDetails"></p>
+<div id="finalBadges"></div>
+<button class="btn" onclick="logout()">العودة للرئيسية</button>
+</section>
+
+<section id="dashboard" class="hidden">
+<div class="card">
+<div class="row">
+<h2>لوحة تحكم المدرب</h2>
+<button class="gray" onclick="logout()">تسجيل خروج</button>
+</div>
+<p class="muted">المهندس عبدالله بن جريد | متابعة تقييمات المتدربين</p>
+<div class="grid">
+<div class="stat">المتدربون المسجلون<strong id="totalUsers">0</strong></div>
+<div class="stat">الإجابات الصحيحة<strong id="totalCorrect">0</strong></div>
+<div class="stat">إجمالي الإجابات<strong id="totalAnswers">0</strong></div>
+<div class="stat">متوسط الدقة العامة<strong id="accuracy">0%</strong></div>
+</div>
+</div>
+
+<div class="card">
+<h2>🏆 إحصائيات الفرق</h2>
+<div id="coachTeams" class="grid"></div>
+</div>
+
+<div class="card">
+<div class="row">
+<h2>سجل المتدربين والنتائج</h2>
+<div>
+<button class="green" onclick="exportCSV()">تصدير CSV</button>
+<button class="red" onclick="clearData()" style="margin-right:10px">مسح السجلات</button>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr>
+<th>المتدرب</th><th>الفريق</th><th>النقاط</th>
+<th>الصحيحة</th><th>الحالة</th><th>التفاصيل</th>
+</tr></thead>
+<tbody id="usersTable"></tbody>
+</table>
+</div>
+</div>
+
+<div class="card">
+<h2>سجل القرارات والتحليلات</h2>
+<div class="table-wrap">
+<table>
+<thead><tr>
+<th>الوقت</th><th>المتدرب</th><th>السيناريو</th>
+<th>النتيجة</th><th>التبرير المكتوب</th>
+</tr></thead>
+<tbody id="logsTable"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+</main>
+<footer>© ميدان أخلاقيات الأمن السيبراني | المهندس عبدالله بن جريد</footer>
+
+<script>
+"use strict";
+
+const TEAM_NAMES=[
+"",
+"الصقور",
+"الدرع",
+"الحراس",
+"الصواعق",
+"الذئاب السيبرانية"
+];
+
+// مكتبة الرسوم البصرية الاحترافية المتقدمة لكل سيناريو
+const VISUALS = {
+ folder: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><path d="M30 40h70l20 20h120v40H30z" fill="#38bdf8" opacity="0.2"/><path d="M30 50h240v50H30z" fill="#38bdf8" opacity="0.9"/><circle cx="150" cy="75" r="12" fill="#020617"/><path d="M144 75l5 5 10-10" stroke="#10b981" stroke-width="3" fill="none"/></svg>`,
+ 
+ bug: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><circle cx="150" cy="60" r="30" fill="#ef4444" opacity="0.2"/><circle cx="150" cy="60" r="18" fill="#ef4444"/><path d="M138 48l24 24M162 48l-24 24" stroke="#fff" stroke-width="4"/><path d="M110 50h20M170 50h20M120 75h15M165 75h15" stroke="#38bdf8" stroke-width="3"/></svg>`,
+
+ data: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><rect x="80" y="35" width="60" height="50" rx="6" fill="#38bdf8" opacity="0.8"/><rect x="160" y="35" width="60" height="50" rx="6" fill="#10b981" opacity="0.8"/><path d="M142 60h16" stroke="#f59e0b" stroke-width="4" stroke-dasharray="4,4"/></svg>`,
+
+ ai: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><circle cx="150" cy="60" r="25" fill="#38bdf8" opacity="0.3"/><circle cx="150" cy="60" r="15" fill="#38bdf8"/><path d="M120 60h15M165 60h15M150 30v15M150 75v15" stroke="#10b981" stroke-width="3"/></svg>`,
+
+ phishing: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><path d="M90 45l60 35 60-35v45H90z" fill="#f59e0b" opacity="0.2"/><path d="M90 45l60 35 60-35" stroke="#f59e0b" stroke-width="3" fill="none"/><circle cx="150" cy="55" r="8" fill="#ef4444"/></svg>`,
+
+ key: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><circle cx="130" cy="60" r="16" fill="none" stroke="#38bdf8" stroke-width="4"/><path d="M142 60h40v12h-10v8h-10v-8h-20z" fill="#38bdf8"/></svg>`,
+
+ usb: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><rect x="120" y="45" width="60" height="40" rx="6" fill="#ef4444" opacity="0.8"/><rect x="135" y="30" width="30" height="15" rx="3" fill="#f59e0b"/></svg>`,
+
+ global: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><circle cx="150" cy="60" r="35" fill="none" stroke="#38bdf8" stroke-width="3"/><ellipse cx="150" cy="60" rx="15" ry="35" fill="none" stroke="#38bdf8" stroke-width="2"/><path d="M110 60h80" stroke="#38bdf8" stroke-width="2"/></svg>`,
+
+ shield: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><path d="M150 25l35 15v30c0 22-15 35-35 40-20-5-35-18-35-40V40z" fill="#10b981" opacity="0.8"/><path d="M140 65l10 10 20-20" stroke="#fff" stroke-width="4" fill="none"/></svg>`,
+
+ fire: `<svg viewBox="0 0 300 120"><rect width="300" height="120" rx="12" fill="#0f172a"/><path d="M150 30c15 20 25 30 25 45a25 25 0 01-50 0c0-15 10-25 25-45z" fill="#ef4444"/><path d="M150 50c8 10 12 15 12 23a12 12 0 01-24 0c0-8 4-13 12-23z" fill="#f59e0b"/></svg>`
+};
+
+const QUESTIONS=[
+{
+v:"folder",
+t:"ملف رواتب مفتوح",
+d:"وجدت مجلداً على الشبكة يحتوي على رواتب وتقييمات زملائك، ويمكنك فتحه دون تصريح.",
+o:["أتصفح الملفات لأنها متاحة","أتوقف وأبلغ مسؤول النظام"],
+a:1,
+f:"إتاحة الملف تقنياً لا تعني السماح بالاطلاع عليه.",
+k:["خصوصية","سرية","صلاحية"]
+},
+{
+v:"bug",
+t:"ثغرة خارج نطاق الاختبار",
+d:"أثناء اختبار اختراق مصرح به، اكتشفت ثغرة في نظام خارج نطاق التفويض.",
+o:["أستغل الثغرة لإثبات خطورتها","أتوقف وأبلغ عبر القنوات المعتمدة"],
+a:1,
+f:"الاختبار الأخلاقي يتطلب الالتزام بنطاق التفويض.",
+k:["صلاحية","إبلاغ","مساءلة"]
+},
+{
+v:"data",
+t:"نسخ بيانات العملاء",
+d:"لاحظت زميلاً ينسخ بيانات عملاء حقيقية إلى جهازه الشخصي.",
+o:["أبلغ وفق سياسة المؤسسة","أنسخ البيانات للتحقق بنفسي"],
+a:0,
+f:"حماية البيانات تستلزم استخدام القنوات الرسمية دون نسخ إضافي.",
+k:["سرية","خصوصية","إبلاغ"]
+},
+{
+v:"ai",
+t:"الذكاء الاصطناعي والبيانات الحساسة",
+d:"تريد تحليل سجلات أمنية تتضمن معلومات شخصية باستخدام أداة ذكاء اصطناعي خارجية.",
+o:["أرفع السجلات كاملة","أستخدم أداة معتمدة وبيانات منقحة"],
+a:1,
+f:"يجب الالتزام بضوابط مشاركة البيانات مع الأدوات الخارجية.",
+k:["خصوصية","سرية","صلاحية"]
+},
+{
+v:"phishing",
+t:"رسالة تصيد إلكتروني",
+d:"وصلتك رسالة تطلب إدخال كلمة المرور عبر رابط غير معروف.",
+o:["أفتح الرابط للتأكد","أبلغ فريق الأمن دون فتح الرابط"],
+a:1,
+f:"الإبلاغ الآمن يقلل خطر سرقة بيانات الاعتماد.",
+k:["إبلاغ","ضرر"]
+},
+{
+v:"key",
+t:"كلمة مرور زميل",
+d:"طلب منك زميل كلمة مرور حسابك لإنجاز مهمة عاجلة.",
+o:["أشاركه كلمة المرور","أرفض وأقترح صلاحية رسمية"],
+a:1,
+f:"الحسابات الشخصية لا يجوز مشاركتها.",
+k:["صلاحية","مساءلة"]
+},
+{
+v:"usb",
+t:"ذاكرة USB مجهولة",
+d:"عثرت على ذاكرة USB في ممر المؤسسة.",
+o:["أسلمها للفريق المختص","أوصلها بجهازي لمعرفة صاحبها"],
+a:0,
+f:"الوسائط مجهولة المصدر قد تحمل برمجيات ضارة.",
+k:["ضرر","إبلاغ"]
+},
+{
+v:"global",
+t:"تسريب بيانات على الإنترنت",
+d:"اكتشفت بيانات تخص المؤسسة منشورة على موقع عام.",
+o:["أنشر الرابط لتنبيه الجميع","أوثق الحد الأدنى وأبلغ المختصين"],
+a:1,
+f:"نشر البيانات المسربة مجدداً قد يزيد الضرر.",
+k:["سرية","إبلاغ","ضرر"]
+},
+{
+v:"shield",
+t:"طلب المدير تجاوز الضوابط",
+d:"طلب منك مدير تعطيل آلية حماية دون موافقة أمنية.",
+o:["أنفذ فوراً","أطلب الموافقات وفق الإجراءات"],
+a:1,
+f:"المنصب الإداري لا يلغي متطلبات الحوكمة الأمنية.",
+k:["صلاحية","مساءلة"]
+},
+{
+v:"folder",
+t:"تعديل السجلات",
+d:"اكتشفت خطأ ارتكبته وتوجد سجلات تثبت الواقعة.",
+o:["أحذف السجلات","أحافظ عليها وأبلغ بالواقعة"],
+a:1,
+f:"سلامة السجلات ضرورية للتحقيق والمساءلة.",
+k:["مساءلة","إبلاغ"]
+},
+{
+v:"data",
+t:"تصوير شاشة تحتوي بيانات",
+d:"تريد مشاركة لقطة شاشة توضح مشكلة تقنية، لكنها تعرض معلومات عملاء.",
+o:["أخفي البيانات الحساسة قبل المشاركة المعتمدة","أرسل الصورة كما هي"],
+a:0,
+f:"يجب تقليل البيانات المكشوفة إلى الحد الضروري.",
+k:["خصوصية","سرية"]
+},
+{
+v:"bug",
+t:"اختبار هجوم حجب الخدمة",
+d:"تريد تجربة اختبار ضغط قد يؤثر في توفر نظام إنتاجي.",
+o:["أنفذه دون تنسيق","أطلب تصريحاً وخطة اختبار آمنة"],
+a:1,
+f:"الاختبارات قد تسبب انقطاع الخدمة ويجب ضبط آثارها.",
+k:["صلاحية","ضرر"]
+},
+{
+v:"key",
+t:"طلب معلومات من جهة مجهولة",
+d:"اتصل شخص يدعي أنه من الدعم الفني ويطلب بيانات الموظفين.",
+o:["أتحقق من هويته وصلاحيته عبر قناة موثوقة","أقدم المعلومات مباشرة"],
+a:0,
+f:"التحقق من الهوية والتفويض أساسي قبل الإفصاح.",
+k:["خصوصية","صلاحية"]
+},
+{
+v:"usb",
+t:"استخدام أدوات غير مرخصة",
+d:"وجدت أداة غير معتمدة قد تسرع إنجاز المهمة.",
+o:["أثبتها دون مراجعة","أطلب تقييمها واعتمادها"],
+a:1,
+f:"الأدوات غير المعتمدة قد تعرض المؤسسة لمخاطر أمنية.",
+k:["ضرر","مساءلة"]
+},
+{
+v:"shield",
+t:"تقرير ثغرة أمنية",
+d:"اكتشفت ثغرة في تطبيق عام وتريد نشر تفاصيلها.",
+o:["أنشر التفاصيل فوراً","أتبع سياسة الإفصاح المسؤول"],
+a:1,
+f:"الإفصاح المسؤول يوازن بين الإصلاح والمصلحة العامة.",
+k:["إبلاغ","ضرر"]
+},
+{
+v:"key",
+t:"حساب موظف سابق",
+d:"اكتشفت أن حساب موظف غادر المؤسسة ما زال فعالاً.",
+o:["أستخدم الحساب لفحص الملفات","أبلغ إدارة الهوية لإيقافه"],
+a:1,
+f:"الحسابات غير المستخدمة تزيد مخاطر الوصول غير المصرح.",
+k:["صلاحية","إبلاغ"]
+},
+{
+v:"bug",
+t:"مراقبة زميل دون تفويض",
+d:"تشك في تصرفات زميل وتفكر في مراقبة بريده الإلكتروني.",
+o:["أراقب بريده سراً","أبلغ الجهة المختصة دون تجسس"],
+a:1,
+f:"الاشتباه لا يمنح صلاحية انتهاك الخصوصية.",
+k:["خصوصية","صلاحية","إبلاغ"]
+},
+{
+v:"data",
+t:"مشاركة بيانات التدريب",
+d:"تريد استخدام سجلات حقيقية في عرض تعليمي.",
+o:["أستخدم بيانات وهمية أو معتمدة ومنقحة","أعرض السجلات الأصلية"],
+a:0,
+f:"الأمثلة التعليمية يجب ألا تكشف بيانات حساسة.",
+k:["خصوصية","سرية"]
+},
+{
+v:"fire",
+t:"اكتشاف حادث أمني خطير",
+d:"رصدت نشاطاً مشبوهاً قد يدل على اختراق جارٍ لنظام مهم.",
+o:["أحاول إخفاء الحادث لحين التأكد","أبلغ فوراً وأتبع خطة الاستجابة"],
+a:1,
+f:"الإبلاغ السريع والالتزام بخطة الاستجابة يقللان الضرر.",
+k:["إبلاغ","ضرر","مساءلة"]
+}
+];
+
+const STORAGE_KEY="cyber_ethics_standalone_v6";
+const SESSION_KEY="cyber_ethics_curr_session";
+
+let db=loadDB();
+let current=null;
+let index=0;
+let selected=null;
+let answered=false;
+let remaining=60;
+let timer=null;
+
+function loadDB(){
+ try{
+  const data=JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if(data && Array.isArray(data.users) && Array.isArray(data.logs))
+   return data;
+ }catch(e){}
+ return {users:[],logs:[]};
+}
+
+function save(){
+ try{
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(db));
+ }catch(e){
+  alert("تعذر حفظ البيانات محلياً.");
+ }
+}
+
+function el(id){return document.getElementById(id)}
+function setText(id,value){el(id).textContent=value}
+
+function show(id){
+ clearInterval(timer);
+ ["login","coachLogin","game","dashboard","finished"]
+ .forEach(x=>el(x).classList.add("hidden"));
+ el(id).classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+
+function escapeHTML(v){
+ return String(v).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function createId(){
+ if(window.crypto && crypto.randomUUID)
+  return crypto.randomUUID();
+ return Date.now()+"-"+Math.random().toString(36).slice(2);
+}
+
+el("joinForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const name=el("name").value.trim();
+ const team=Number(el("team").value);
+ if(!name || team<1 || team>5)return;
+
+ let existing=db.users.find(u=>u.name===name && u.team===team);
+ if(!existing){
+  current={
+   id:createId(),
+   name:name,
+   team:team,
+   score:0,
+   correct:0,
+   completed:[],
+   badges:[],
+   created:new Date().toISOString()
+  };
+  db.users.push(current);
+  save();
+ }else{
+  current=existing;
+ }
+
+ sessionStorage.setItem(SESSION_KEY,current.id);
+ startGame();
+});
+
+el("coachForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const u=el("coachUser").value;
+ const p=el("coachPass").value;
+ if(u==="abodix07" && p==="2030"){
+  show("dashboard");
+  renderDashboard();
+ }else{
+  alert("بيانات المدرب غير صحيحة");
+ }
+});
+
+function logout(){
+ clearInterval(timer);
+ current=null;
+ sessionStorage.removeItem(SESSION_KEY);
+ el("joinForm").reset();
+ el("coachForm").reset();
+ show("login");
+}
+
+function teamTotals(){
+ const totals=[0,0,0,0,0];
+ db.users.forEach(u=>{
+  if(u.team>=1 && u.team<=5)
+   totals[u.team-1]+=Number(u.score)||0;
+ });
+ return totals;
+}
+
+function renderTeams(target){
+ const totals=teamTotals();
+ const order=[1,2,3,4,5].sort((a,b)=>totals[b-1]-totals[a-1]);
+ el(target).innerHTML=order.map((t,i)=>`
+ <div class="team">
+ <div>${i===0?"🥇":i===1?"🥈":i===2?"🥉":"🛡️"} ${TEAM_NAMES[t]}</div>
+ <strong>${totals[t-1]}</strong>
+ <small>مجموع نقاط الفريق</small>
+ </div>`).join("");
+}
+
+function startGame(){
+ show("game");
+ setText("welcome","مرحباً بالممتدرب: "+current.name);
+ setText("teamName","الفريق: "+TEAM_NAMES[current.team]);
+ renderTeams("teamBoard");
+ index=QUESTIONS.findIndex((q,i)=>!current.completed.includes(i));
+ if(index===-1){finish();return}
+ loadQuestion();
+}
+
+function loadQuestion(){
+ clearInterval(timer);
+ selected=null;
+ answered=false;
+ remaining=60;
+
+ if(index>=QUESTIONS.length){
+  finish();return;
+ }
+
+ const q=QUESTIONS[index];
+ setText("counter",`السيناريو ${index+1} من ${QUESTIONS.length}`);
+ 
+ // عرض الصورة البصرية المتقدمة الخاصة بالسيناريو
+ el("sceneVisual").innerHTML = VISUALS[q.v] || VISUALS.shield;
+
+ setText("questionTitle",q.t);
+ setText("questionDesc",q.d);
+
+ el("progress").style.width=
+  ((current.completed.length/QUESTIONS.length)*100)+"%";
+
+ el("reason").value="";
+ el("feedback").classList.add("hidden");
+ el("submitAnswer").disabled=false;
+ el("answers").innerHTML="";
+
+ q.o.forEach((option,i)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  b.textContent=option;
+  b.onclick=()=>choose(i);
+  el("answers").appendChild(b);
+ });
+
+ updateClock();
+ timer=setInterval(()=>{
+  remaining--;
+  updateClock();
+  if(remaining<=0){
+   clearInterval(timer);
+   if(!answered)submitAnswer(true);
+  }
+ },1000);
+
+ renderBadges();
+}
+
+function updateClock(){
+ const m=String(Math.floor(remaining/60)).padStart(2,"0");
+ const s=String(remaining%60).padStart(2,"0");
+ setText("clock","⏱ "+m+":"+s);
+ el("clock").style.color=remaining<=10?"#ef4444":"#f59e0b";
+}
+
+function choose(i){
+ if(answered)return;
+ selected=i;
+ [...el("answers").children].forEach((b,n)=>{
+  b.classList.toggle("selected",n===i);
+ });
+}
+
+function tag(value){
+ if(answered)return;
+ const a=el("reason");
+ a.value+=(a.value.trim()?"، ":"")+value;
+ a.focus();
+}
+
+function evaluateReason(reason,q){
+ if(!reason.trim())return 0;
+ const text=reason.toLowerCase();
+ const dictionary={
+  "خصوصية":["خصوصية","الخصوصية","شخصية","البيانات"],
+  "سرية":["سرية","السرية","حماية","تسريب"],
+  "صلاحية":["صلاحية","الصلاحيات","تفويض","تصريح","إذن"],
+  "إبلاغ":["إبلاغ","بلاغ","ابلاغ","مسؤول","المختص"],
+  "ضرر":["ضرر","المخاطر","الخطر","السلامة"],
+  "مساءلة":["مساءلة","مسؤولية","سياسة","إجراءات"]
+ };
+ let matches=0;
+ q.k.forEach(key=>{
+  if((dictionary[key]||[]).some(word=>text.includes(word)))
+   matches++;
+ });
+ return Math.min(5,Math.round(matches/q.k.length*5));
+}
+
+function submitAnswer(timeout=false){
+ if(answered)return;
+ const q=QUESTIONS[index];
+ const reason=el("reason").value.trim();
+
+ if(!timeout && selected===null){
+  alert("اختر القرار المهني أولاً");
+  return;
+ }
+ if(!timeout && !reason){
+  alert("اكتب تبريرك الأخلاقي أو اختر الوسوم");
+  return;
+ }
+
+ answered=true;
+ clearInterval(timer);
+ el("submitAnswer").disabled=true;
+
+ const correct=!timeout && selected===q.a;
+ const reasonPoints=correct?evaluateReason(reason,q):0;
+ const points=correct?10+reasonPoints:0;
+
+ current.score+=points;
+ if(correct)current.correct++;
+ current.completed.push(index);
+
+ const buttons=[...el("answers").children];
+ buttons.forEach((b,i)=>{
+  b.disabled=true;
+  if(i===q.a)b.classList.add("correct");
+  if(i===selected && !correct)b.classList.add("wrong");
+ });
+
+ db.logs.push({
+  userId:current.id,
+  name:current.name,
+  team:current.team,
+  question:index,
+  title:q.t,
+  selected:selected,
+  correct:correct,
+  timeout:timeout,
+  reason:reason,
+  reasonPoints:reasonPoints,
+  points:points,
+  time:new Date().toISOString()
+ });
+
+ updateBadges();
+ save();
+
+ setText("feedbackTitle",
+  timeout?"انتهى الوقت":correct?"قرار صحيح ✅":"قرار غير صحيح ❌");
+ setText("feedbackText",
+  q.f+" | النقاط المكتسبة: "+points);
+ setText("reasonReview",
+  "تقييم التبرير: "+reasonPoints+"/5 نقاط.");
+
+ el("feedback").classList.remove("hidden");
+ renderTeams("teamBoard");
+ renderBadges();
+}
+
+function updateBadges(){
+ const b=current.badges;
+ const add=x=>{if(!b.includes(x))b.push(x)};
+ if(current.correct>=1)add("🌟 أول قرار صحيح");
+ if(current.correct>=5)add("🥉 مبتدئ واعٍ");
+ if(current.correct>=10)add("🥈 حارس أخلاقي");
+ if(current.correct>=15)add("🥇 خبير المسؤولية");
+ if(current.completed.length===QUESTIONS.length)add("🎓 مكتمل الاختبار");
+}
+
+function renderBadges(){
+ el("badges").innerHTML=current.badges.length?
+  current.badges.map(b=>`<span class="badge">${escapeHTML(b)}</span>`).join(""):
+  "لم تحصل على شارات بعد.";
+}
+
+function nextQuestion(){
+ index=QUESTIONS.findIndex((q,i)=>!current.completed.includes(i));
+ if(index===-1){finish();return}
+ loadQuestion();
+ window.scrollTo(0,0);
+}
+
+function finish(){
+ clearInterval(timer);
+ updateBadges();
+ save();
+ show("finished");
+ setText("finalName",current.name+" | "+TEAM_NAMES[current.team]);
+ setText("finalScore",current.score+" نقطة إجمالية");
+ setText("finalDetails",
+  "الإجابات الصحيحة: "+current.correct+
+  " من "+QUESTIONS.length);
+ el("finalBadges").innerHTML=current.badges
+  .map(b=>`<span class="badge">${escapeHTML(b)}</span>`).join("");
+}
+
+function renderDashboard(){
+ renderTeams("coachTeams");
+ const users=db.users;
+ const logs=db.logs;
+ const correct=logs.filter(x=>x.correct).length;
+
+ setText("totalUsers",users.length);
+ setText("totalCorrect",correct);
+ setText("totalAnswers",logs.length);
+ setText("accuracy",logs.length?
+  Math.round(correct/logs.length*100)+"%":"0%");
+
+ const sorted=[...users].sort((a,b)=>b.score-a.score);
+ el("usersTable").innerHTML=sorted.map(u=>`
+ <tr>
+ <td>${escapeHTML(u.name)}</td>
+ <td>${escapeHTML(TEAM_NAMES[u.team]||"-")}</td>
+ <td><b>${u.score}</b></td>
+ <td>${u.correct} / ${QUESTIONS.length}</td>
+ <td>${u.completed.length===QUESTIONS.length?"مكتمل":"قيد الحل"}</td>
+ <td><span class="badge">${u.badges.length} شارات</span></td>
+ </tr>`).join("");
+
+ el("logsTable").innerHTML=[...logs].reverse().map(l=>`
+ <tr>
+ <td>${new Date(l.time).toLocaleTimeString("ar-SA")}</td>
+ <td>${escapeHTML(l.name)}</td>
+ <td>${escapeHTML(l.title)}</td>
+ <td>${l.correct?"<span style='color:var(--green)'>صحيح</span>":"<span style='color:var(--red)'>خطأ</span>"}</td>
+ <td>${escapeHTML(l.reason||"بدون تبرير")}</td>
+ </tr>`).join("");
+}
+
+function csvCell(v){
+ const s=String(v??"");
+ return '"'+s.replace(/"/g,'""')+'"';
+}
+
+function exportCSV(){
+ const rows=[
+ ["الوقت","المتدرب","الفريق","السيناريو",
+  "الإجابة صحيحة","النقاط","نقاط التبرير","التبرير"]
+ ];
+ db.logs.forEach(l=>rows.push([
+  l.time,l.name,TEAM_NAMES[l.team],l.title,
+  l.correct?"نعم":"لا",l.points,l.reasonPoints,l.reason
+ ]));
+
+ const csv="\uFEFF"+rows.map(r=>r.map(csvCell).join(",")).join("\r\n");
+ const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="cyber_ethics_trainees_report.csv";
+ document.body.appendChild(a);
+ a.click();
+ a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function clearData(){
+ if(!confirm("هل أنت متأكد من مسح جميع سجلات المتدربين؟"))return;
+ db={users:[],logs:[]};
+ save();
+ renderDashboard();
+}
+
+function restoreSession(){
+ const id=sessionStorage.getItem(SESSION_KEY);
+ const user=db.users.find(u=>u.id===id);
+ if(user){
+  current=user;
+  startGame();
+ }else{
+  show("login");
+ }
+}
+
+restoreSession();
+</script>
+</body>
+</html>
